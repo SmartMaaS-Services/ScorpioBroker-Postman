@@ -1,0 +1,1551 @@
+{
+	"info": {
+		"_postman_id": "31e4c7cb-ef30-48a7-9973-2313bb66558f",
+		"name": "Scorpio NGSI-LD Broker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Entity List",
+			"item": [
+				{
+					"name": "/entities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"urn:ngsi-ld:testunit:123\",\n    \"type\": \"AirQualityObserved\",\n    \"dateObserved\": {\n        \"type\": \"Property\",\n        \"value\": {\n            \"@type\": \"DateTime\",\n            \"@value\": \"2018-08-07T12:00:00Z\"\n        }\n    },\n    \"NO2\": {\n        \"type\": \"Property\",\n        \"value\": 22,\n        \"unitCode\": \"GP\",\n        \"accuracy\": {\n            \"type\": \"Property\",\n            \"value\": 0.95\n        }\n    },\n    \"refPointOfInterest\": {\n        \"type\": \"Relationship\",\n        \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:MainSquare\"\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/ld+json",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities?type=AirQualityObserved",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "AirQualityObserved"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Entity by id",
+			"item": [
+				{
+					"name": "/entities/{entityId}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities/urn:ngsi-ld:testunit:123",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:testunit:123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entities/{entityId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities/urn:ngsi-ld:testunit:123",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:testunit:123"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Entity Attribute List",
+			"item": [
+				{
+					"name": "/entities/{entityId}/attrs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"temperature\": {\n        \"type\": \"Property\",\n        \"value\": 12.2\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities/urn:ngsi-ld:testunit:123/attrs",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entities/{entityId}/attrs?options=noOverwrite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"temperature\": {\n        \"type\": \"Property\",\n        \"value\": 14.6\n    },\n\t\"airQualityLevel\": {\n        \"type\": \"Property\",\n        \"value\": \"moderate\"\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities/urn:ngsi-ld:testunit:123/attrs?options=noOverwrite",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "noOverwrite"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entities/{entityId}/attrs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"temperature\": {\n        \"type\": \"Property\",\n        \"value\": 14.6\n    },\n\t\"airQualityLevel\": {\n        \"type\": \"Property\",\n        \"value\": \"good\"\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities/urn:ngsi-ld:testunit:123/attrs",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entities/{entityId}/attrs",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"temperature\": {\n        \"type\": \"Property\",\n        \"value\": 15\n    },\n    \"airQualityLevel\": {\n        \"type\": \"Property\",\n        \"value\": \"unhealthy\"\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities/urn:ngsi-ld:testunit:123/attrs",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Attribute by id",
+			"item": [
+				{
+					"name": "/entities/{entityId}/attrs/{attrId} [BUGGY, returns: 500 Internal server error]",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"temperature\": {\n        \"type\": \"Property\",\n        \"value\": 16.4\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities/urn:ngsi-ld:testunit:123/attrs/temperature",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs",
+								"temperature"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entities/{entityId}/attrs/{attrId}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entities/urn:ngsi-ld:testunit:123/attrs/temperature",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs",
+								"temperature"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Subscriptions List",
+			"item": [
+				{
+					"name": "/subscriptions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"urn:ngsi-ld:Subscription:MyAwesomeSubscription\",\n    \"type\": \"Subscription\",\n    \"description\": \"Notifies me of all air quality level changes\",\n    \"entities\": [\n        {\n            \"idPattern\": \".*\",\n            \"type\": \"AirQualityObserved\"\n        }\n    ],\n    \"watchedAttributes\": [\n        \"airQualityLevel\"\n    ],\n    \"notification\": {\n        \"attributes\": [\n            \"id\",\n            \"type\",\n            \"airQualityLevel\"\n        ],\n        \"format\": \"keyValues\",\n        \"endpoint\": {\n            \"uri\": \"http://{{subscription_host}}:{{subscription_port}}/subscription/air-quality-level-change\",\n            \"accept\": \"application/ld+json\"\n        }\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/subscriptions",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							},
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/subscriptions",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions?limit={number}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							},
+							{
+								"key": "Link",
+								"type": "text",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/subscriptions?limit=100",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"subscriptions"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Subscription by Id",
+			"item": [
+				{
+					"name": "/subscriptions/{subscriptionId}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							},
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/subscriptions/urn:ngsi-ld:Subscription:MyAwesomeSubscription",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"subscriptions",
+								"urn:ngsi-ld:Subscription:MyAwesomeSubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions/{subscriptionId}",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"notification\": {\n        \"attributes\": [\n            \"id\",\n            \"type\",\n            \"airQualityLevel\",\n            \"dateObserved\"\n        ],\n        \"endpoint\": {\n            \"accept\": \"application/ld+json\",\n            \"uri\": \"http://{{subscription_host}}:{{subscription_port}}/subscription/air-quality-level-change\"\n        },\n        \"format\": \"keyValues\"\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/subscriptions/urn:ngsi-ld:Subscription:MyAwesomeSubscription",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"subscriptions",
+								"urn:ngsi-ld:Subscription:MyAwesomeSubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions/{subscriptionId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/subscriptions/urn:ngsi-ld:Subscription:MyAwesomeSubscription",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"subscriptions",
+								"urn:ngsi-ld:Subscription:MyAwesomeSubscription"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Context source registration list",
+			"item": [
+				{
+					"name": "/csourceRegistrations",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"urn:ngsi-ld:ContextSourceRegistration:MyAwesomeContextSourceRegistration\",\n    \"type\": \"ContextSourceRegistration\",\n    \"description\": \"Resgisters a context source for my AirQualityObserved entities\",\n    \"information\": [\n        {\n            \"entities\": [\n                {\n                    \"idPattern\": \".*\",\n                    \"type\": \"AirQualityObserved\"\n                }\n            ],\n            \"properties\": [\n                \"id\",\n                \"type\",\n                \"airQualityLevel\",\n                \"dateObserved\"\n            ],\n            \"relationships\": [\n                \"refPointOfInterest\"\n            ]\n        }\n    ],\n    \"endpoint\": \"http://my.ownbroker.org:1026\",\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceRegistrations",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceRegistrations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csourceRegistrations?type={entityType}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/ld+json"
+							},
+							{
+								"key": "Link",
+								"type": "text",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceRegistrations?type=AirQualityObserved",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceRegistrations"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "AirQualityObserved"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Context source registration by Id",
+			"item": [
+				{
+					"name": "/csourceRegistrations/{registrationId}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/ld+json"
+							},
+							{
+								"key": "Link",
+								"type": "text",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceRegistrations/urn:ngsi-ld:ContextSourceRegistration:MyAwesomeContextSourceRegistration",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceRegistrations",
+								"urn:ngsi-ld:ContextSourceRegistration:MyAwesomeContextSourceRegistration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csourceRegistrations/{registrationId}",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"information\": {\n        \"entities\": {\n            \"type\": \"AirQualityObserved\",\n            \"idPattern\": \".*\"\n        },\n        \"properties\": [\n            \"id\",\n            \"type\",\n            \"airQualityLevel\",\n            \"dateObserved\",\n            \"NO2\"\n        ],\n        \"relationships\": \"refPointOfInterest\"\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceRegistrations/urn:ngsi-ld:ContextSourceRegistration:MyAwesomeContextSourceRegistration",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceRegistrations",
+								"urn:ngsi-ld:ContextSourceRegistration:MyAwesomeContextSourceRegistration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csourceRegistrations/{registrationId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceRegistrations/urn:ngsi-ld:ContextSourceRegistration:MyAwesomeContextSourceRegistration",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceRegistrations",
+								"urn:ngsi-ld:ContextSourceRegistration:MyAwesomeContextSourceRegistration"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Context source registration subscription list",
+			"item": [
+				{
+					"name": "/csourceSubscriptions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"urn:ngsi-ld:Subscription:MyAwesomeCsourceSubscription\",\n    \"type\": \"Subscription\",\n    \"description\": \"Notifies me of all context source registrations potentially providing information for AirQualityObserved entities I'm interested in\",\n    \"entities\": [\n        {\n            \"idPattern\": \".*\",\n            \"type\": \"AirQualityObserved\"\n        }\n    ],\n    \"notification\": {\n        \"attributes\": [\n            \"airQualityLevel\",\n            \"dateObserved\"\n        ],\n        \"format\": \"keyValues\",\n        \"endpoint\": {\n            \"uri\": \"http://{{subscription_host}}:{{subscription_port}}/csource-subscription/air-quality-observed-csource\",\n            \"accept\": \"application/ld+json\"\n        }\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceSubscriptions",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceSubscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csourceSubscriptions [BUGGY, returns: 500 Internal server error when containing subscription qithout 'watchedAttributes']",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							},
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceSubscriptions",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceSubscriptions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Context source registration subscription by Id",
+			"item": [
+				{
+					"name": "/csourceSubscriptions/{subscriptionId}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							},
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceSubscriptions/urn:ngsi-ld:Subscription:MyAwesomeCsourceSubscription",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceSubscriptions",
+								"urn:ngsi-ld:Subscription:MyAwesomeCsourceSubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csourceSubscriptions/{subscriptionId}",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"watchedAttributes\": [\n        \"airQualityLevel\",\n        \"dateObserved\"\n    ],\n    \"notification\": {\n        \"attributes\": [\n            \"id\",\n            \"type\",\n            \"airQualityLevel\",\n            \"dateObserved\"\n        ],\n        \"format\": \"keyValues\",\n        \"endpoint\": {\n            \"uri\": \"http://{{subscription_host}}:{{subscription_port}}/csource-subscription/air-quality-observed-csource\",\n            \"accept\": \"application/ld+json\"\n        }\n    },\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceSubscriptions/urn:ngsi-ld:Subscription:MyAwesomeCsourceSubscription",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceSubscriptions",
+								"urn:ngsi-ld:Subscription:MyAwesomeCsourceSubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csourceSubscriptions/{subscriptionId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/csourceSubscriptions/urn:ngsi-ld:Subscription:MyAwesomeCsourceSubscription",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceSubscriptions",
+								"urn:ngsi-ld:Subscription:MyAwesomeCsourceSubscription"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Entity Operations [NOT YET IMPLEMENTED?]",
+			"item": [
+				{
+					"name": "/entityOperations/create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:testunit:124\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-10T12:00:00Z\"\n            }\n        },\n        \"NO2\": {\n            \"type\": \"Property\",\n            \"value\": 23,\n            \"unitCode\": \"GP\",\n            \"accuracy\": {\n                \"type\": \"Property\",\n                \"value\": 0.95\n            }\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:TrainStation\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    },\n    {\n        \"id\": \"urn:ngsi-ld:testunit:125\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-12T12:00:00Z\"\n            }\n        },\n        \"NO2\": {\n            \"type\": \"Property\",\n            \"value\": 21,\n            \"unitCode\": \"GP\",\n            \"accuracy\": {\n                \"type\": \"Property\",\n                \"value\": 0.95\n            }\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:HarbourDistrict\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entityOperations/create",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entityOperations",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entityOperations/upsert?options=replace (default mode)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:testunit:125\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-12T12:00:00Z\"\n            }\n        },\n        \"airQualityLevel\": {\n            \"type\": \"Property\",\n            \"value\": \"moderate\"\n        },\n        \"CO_Level\": {\n            \"type\": \"Property\",\n            \"value\": \"unhealthy\"\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:HarbourDistrict\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    },\n    {\n        \"id\": \"urn:ngsi-ld:testunit:126\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-14T12:00:00Z\"\n            }\n        },\n        \"NO2\": {\n            \"type\": \"Property\",\n            \"value\": 20,\n            \"unitCode\": \"GP\",\n            \"accuracy\": {\n                \"type\": \"Property\",\n                \"value\": 0.95\n            }\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:Centerpark\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entityOperations/upsert?options=replace",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entityOperations",
+								"upsert"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "replace"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entityOperations/upsert?options=update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:testunit:125\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-12T12:00:00Z\"\n            }\n        },\n        \"airQualityLevel\": {\n            \"type\": \"Property\",\n            \"value\": \"unhealthy\"\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:HarbourDistrict\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    },\n    {\n        \"id\": \"urn:ngsi-ld:testunit:126\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-14T12:00:00Z\"\n            }\n        },\n        \"NO2\": {\n            \"type\": \"Property\",\n            \"value\": 18,\n            \"unitCode\": \"GP\",\n            \"accuracy\": {\n                \"type\": \"Property\",\n                \"value\": 0.95\n            }\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:Centerpark\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entityOperations/upsert?options=update",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entityOperations",
+								"upsert"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "update"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entityOperations/update?options=noOverwrite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:testunit:125\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-12T12:00:00Z\"\n            }\n        },\n        \"airQualityLevel\": {\n            \"type\": \"Property\",\n            \"value\": \"good\"\n        },\n        \"temperature\": {\n            \"type\": \"Property\",\n            \"value\": 14.6\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:HarbourDistrict\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    },\n    {\n        \"id\": \"urn:ngsi-ld:testunit:126\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-14T12:00:00Z\"\n            }\n        },\n        \"NO2\": {\n            \"type\": \"Property\",\n            \"value\": 17,\n            \"unitCode\": \"GP\",\n            \"accuracy\": {\n                \"type\": \"Property\",\n                \"value\": 0.92\n            }\n        },\n        \"temperature\": {\n            \"type\": \"Property\",\n            \"value\": 14.6\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:Centerpark\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entityOperations/update?options=noOverwrite",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entityOperations",
+								"update"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "noOverwrite"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entityOperations/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:testunit:125\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-12T12:00:00Z\"\n            }\n        },\n        \"airQualityLevel\": {\n            \"type\": \"Property\",\n            \"value\": \"good\"\n        },\n        \"temperature\": {\n            \"type\": \"Property\",\n            \"value\": 15\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:HarbourDistrict\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    },\n    {\n        \"id\": \"urn:ngsi-ld:testunit:126\",\n        \"type\": \"AirQualityObserved\",\n        \"dateObserved\": {\n            \"type\": \"Property\",\n            \"value\": {\n                \"@type\": \"DateTime\",\n                \"@value\": \"2018-08-14T12:00:00Z\"\n            }\n        },\n        \"NO2\": {\n            \"type\": \"Property\",\n            \"value\": 17,\n            \"unitCode\": \"GP\",\n            \"accuracy\": {\n                \"type\": \"Property\",\n                \"value\": 0.92\n            }\n        },\n        \"temperature\": {\n            \"type\": \"Property\",\n            \"value\": 15\n        },\n        \"refPointOfInterest\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:PointOfInterest:RZ:Centerpark\"\n        },\n        \"@context\": [\n            \"https://schema.lab.fiware.org/ld/context\",\n            \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n        ]\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entityOperations/update",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entityOperations",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/entityOperations/delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[ \"urn:ngsi-ld:testunit:125\", \"urn:ngsi-ld:testunit:126\" ]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/entityOperations/delete",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entityOperations",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Entity Temporal Evolution",
+			"item": [
+				{
+					"name": "/temporal/entities [BUGGY, returns: 400 Invalid Request, when createdAt or modifiedAt of the Entity is not set (incorrect behavior, since they're system generated]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"urn:ngsi-ld:testunit:123\",\n    \"type\": \"AirQualityObserved\",\n    \"airQualityLevel\": [\n        {\n            \"type\": \"Property\",\n            \"value\": \"good\",\n            \"observedAt\": \"2018-08-07T12:00:00Z\",\n            \"instanceId\": \"urn:ngsi-ld:testunit:123:airQualityLevel:1\"\n        },\n        {\n            \"type\": \"Property\",\n            \"value\": \"moderate\",\n            \"observedAt\": \"2018-08-14T12:00:00Z\",\n            \"instanceId\": \"urn:ngsi-ld:testunit:123:airQualityLevel:2\"\n        },\n        {\n            \"type\": \"Property\",\n            \"value\": \"unhealthy\",\n            \"observedAt\": \"2018-09-14T12:00:00Z\",\n            \"instanceId\": \"urn:ngsi-ld:testunit:123:airQualityLevel:3\"\n        }\n    ],\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/temporal/entities?type=AirQualityObserved&timerel=after&time=2018-01-01T00:00:00Z",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/ld+json",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities?type=AirQualityObserved&timerel=after&time=2018-01-01T00:00:00Z",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "AirQualityObserved"
+								},
+								{
+									"key": "timerel",
+									"value": "after"
+								},
+								{
+									"key": "time",
+									"value": "2018-01-01T00:00:00Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/temporal/entities?type=AirQualityObserved&timerel=after&time=2018-01-01T00:00:00Z&options=temporalValues [BUGGY, returns: 400 Bad Request Data (option 'temporalValues' unsupported?]",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/ld+json",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities?type=AirQualityObserved&timerel=after&time=2018-01-01T00:00:00Z&options=temporalValues",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "AirQualityObserved"
+								},
+								{
+									"key": "timerel",
+									"value": "after"
+								},
+								{
+									"key": "time",
+									"value": "2018-01-01T00:00:00Z"
+								},
+								{
+									"key": "options",
+									"value": "temporalValues"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Temporal Representation of Entity by id",
+			"item": [
+				{
+					"name": "/temporal/entities/{entityId}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities/urn:ngsi-ld:testunit:123",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:testunit:123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/temporal/entities/{entityId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities/urn:ngsi-ld:testunit:123",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:testunit:123"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Temporal Representation of Entity Attribute List",
+			"item": [
+				{
+					"name": "/temporal/entities/{entityId}/attrs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"temperature\": [\n        {\n            \"type\": \"Property\",\n            \"value\": 27.6,\n            \"observedAt\": \"2018-08-07T12:00:00Z\",\n            \"instanceId\": \"urn:ngsi-ld:testunit:123:temperature:1\"\n        },\n        {\n            \"type\": \"Property\",\n            \"value\": 16.2,\n            \"observedAt\": \"2018-09-07T12:00:00Z\",\n            \"instanceId\": \"urn:ngsi-ld:testunit:123:temperature:2\"\n        },\n        {\n            \"type\": \"Property\",\n            \"value\": 3.2,\n            \"observedAt\": \"2018-12-07T12:00:00Z\",\n            \"instanceId\": \"urn:ngsi-ld:testunit:123:temperature:3\"\n        }\n    ],\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities/urn:ngsi-ld:testunit:123/attrs",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Temporal Representation of Entity Attribute by id",
+			"item": [
+				{
+					"name": "/temporal/entities/{entityId}/attrs/{attrId}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Link",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities/urn:ngsi-ld:testunit:123/attrs/temperature",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs",
+								"temperature"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Temporal Representation of Entity Attribute Instance by id",
+			"item": [
+				{
+					"name": "/temporal/entities/{entityId}/attrs/{attrId}/{instanceId} [BUGGY, returns: 404 Resource not found]",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"temperature\": [\n        {\n            \"type\": \"Property\",\n            \"value\": 28.6\n        }\n    ],\n    \"@context\": [\n        \"https://schema.lab.fiware.org/ld/context\",\n        \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities/urn:ngsi-ld:testunit:123/attrs/temperature/urn:ngsi-ld:testunit:123:temperature:1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs",
+								"temperature",
+								"urn:ngsi-ld:testunit:123:temperature:1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/temporal/entities/{entityId}/attrs/{attrId}/{instanceId}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Link",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+							},
+							{
+								"key": "Content-Type",
+								"value": "<https://schema.lab.fiware.org/ld/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+							}
+						],
+						"url": {
+							"raw": "{{host}}:{{port}}/ngsi-ld/v1/temporal/entities/urn:ngsi-ld:testunit:123/attrs/temperature/urn:ngsi-ld:testunit:123:temperature:2",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:testunit:123",
+								"attrs",
+								"temperature",
+								"urn:ngsi-ld:testunit:123:temperature:2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
