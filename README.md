@@ -8,8 +8,8 @@
 </h2>
 
 <p align="center">
-  <a href="mailto:info@smart-maas.eu">Contact</a>
-  <a href="https://github.com/SmartMaaS-Services/ScorpioBroker-Postman/issues</a>
+  <a href="mailto:info@smart-maas.eu">Contact</a> •
+  <a href="https://github.com/SmartMaaS-Services/ScorpioBroker-Postman/issues">Issues</a> •
   <a href="https://smart-maas.eu/en/">Project Page</a>
 </p>
 
